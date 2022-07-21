@@ -367,8 +367,8 @@ Classes chooseClass(){
             + "5)  Hunter" + s
             + "6)  Warlock" + s
             + "7)  Shaman" + s
-            + "8)  D_Night" + s
-            + "9)  D_Hunter" + s
+            + "8)  Death_Knight" + s
+            + "9)  Demon_Hunter" + s
             + "10  Paladin" + s
             + "11) Monk" + s
             + "12) Druid\n\n"};

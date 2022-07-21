@@ -68,7 +68,7 @@ inline Races toRaces( string race){
 }
 
 enum class Classes{ None,Warrior,Mage,Priest,Rogue,Hunter,Warlock,Shaman,
-                D_Night,D_Hunter,Paladin,Monk,Druid};
+                Death_Knight,Demon_Hunter,Paladin,Monk,Druid};
 
 inline const char* toString( Classes cClass)
 {
@@ -82,8 +82,8 @@ inline const char* toString( Classes cClass)
         case Classes::Hunter: return "Hunter";
         case Classes::Warlock:   return "Warlock";
         case Classes::Shaman:   return "Shaman";
-        case Classes::D_Night: return "D_Night";
-        case Classes::D_Hunter:   return "D_Hunter";
+        case Classes::Death_Knight: return "Death_Knight";
+        case Classes::Demon_Hunter:   return "Demon_Hunter";
         case Classes::Paladin:   return "Paladin";
         case Classes::Monk: return "Monk";
         case Classes::Druid:   return "Druid";
@@ -109,10 +109,10 @@ inline Classes toClasses( string cClass){
         return Classes::Warlock;
     else if( cClass=="Shaman")
         return Classes::Shaman;
-    else if( cClass=="D_Night")
-        return Classes::D_Night;
-    else if( cClass=="D_Hunter")
-        return Classes::D_Hunter;
+    else if( cClass=="Death_Knight")
+        return Classes::Death_Knight;
+    else if( cClass=="Demon_Hunter")
+        return Classes::Demon_Hunter;
     else if( cClass=="Paladin")
         return Classes::Paladin;
     else if( cClass=="Monk")

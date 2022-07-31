@@ -1,1 +1,0 @@
-Debug/Spawn.cpp.o Debug/Inventory.cpp.o Debug/main.cpp.o Debug/ItemSlotList.cpp.o

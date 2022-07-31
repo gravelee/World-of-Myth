@@ -150,7 +150,7 @@
  *      eyes colour, hair type, hair colour, tattoos.
  * 
  * 
- *  Create the main menu: 
+ *  Create the main menu:
  * 
  *      
  *      Choose a character & play   ---> character list
@@ -186,8 +186,6 @@
  * 
  * 
  * 
- * 
- * 
  * */
 
 #include <iostream>
@@ -198,8 +196,10 @@
 #include <exception>
 #include <sstream>
 #include <regex>
+#include <algorithm>
 
 #include "Spawn.h"
+//#include "Map.h"
 
 using namespace std;
 
@@ -274,7 +274,7 @@ uint8_t simpleMenu( string menu, uint8_t numberOfChoices){
         
         try  {         
             choice = stoi(menuChoice);}
-        catch( exception){
+        catch( exception &ex){
             choice = -1;}
         
         if( choice<1 || choice>numberOfChoices)
@@ -306,6 +306,9 @@ string chooseName( const vector<string> &characters){
             istringstream iss{str};
             iss>>temp;
             
+            for_each( temp.begin(), temp.begin() + 1, []( char &c){ c = ::tolower(c);});
+            for_each( name.begin(), name.end(), []( char &c){ c = ::tolower(c);});
+            
             if( temp == name){
                 
                 cout<<"\nThat name is already taken!\n";
@@ -327,6 +330,8 @@ string chooseName( const vector<string> &characters){
         }
         
     }while( !isValid);
+    
+    for_each( name.begin(), name.begin() + 1, []( char &c){ c = ::toupper(c);});
     
     return name;
 }
@@ -373,12 +378,12 @@ Classes chooseClass(){
             + "11) Monk" + s
             + "12) Druid\n\n"};
     
-    return static_cast<Classes>(simpleMenu(menu,12));
+    return static_cast<Classes>( simpleMenu( menu,12));
 }
 
 
 
-bool chooseDone(string name, Races race, Classes cClass){
+bool chooseDone( string name, Races race, Classes cClass){
     
     return ( name!="None" && race!=Races::None 
         && cClass!=Classes::None)?true:false;
@@ -419,18 +424,40 @@ void createNewCharacter(
                 + "4) Done" + s
                 + "5) Back\n\n";
         
-        choice = simpleMenu(menu,5);
+        choice = simpleMenu( menu,5);
         
+        switch ( choice){
+            
+            case 1:
+                name = chooseName( characters);
+                break;
+            case 2:
+                race = chooseRace();
+                break;
+            case 3:
+                cClass = chooseClass();
+                break;
+            case 4:
+                done = chooseDone( name,race,cClass);
+                break;
+            default:
+                back = areYouSure();
+        }
+        
+        /*
         if( choice == 1)
-            name = chooseName(characters);
+            name = chooseName( characters);
         else if( choice == 2)
             race = chooseRace();
         else if( choice == 3)
             cClass = chooseClass();
         else if( choice == 4)
-            done = chooseDone(name,race,cClass);
+            done = chooseDone( name,race,cClass);
         else
             back = areYouSure();
+          */  
+        
+        
     
     }while( !(done || back));
     
@@ -467,7 +494,7 @@ void mainMenu(){
                 + "2) Exit\n\n";
             
             choice = simpleMenu( menu,2);
-              
+            
             if( choice==1)
                 createNewCharacter( characters);
             else
@@ -483,7 +510,7 @@ void mainMenu(){
                 + "4) Exit\n\n";
             
             choice = simpleMenu( menu,4);
-              
+            
             if( choice==1){
                 
                 string output{};
@@ -503,13 +530,28 @@ void mainMenu(){
                 string name{};
                 string r{};
                 string c{};
-                uint8_t lvl{};
-                
+                unsigned short lvl{};
+
                 iss>>name>>r>>c>>lvl;
+                
                 Races race =  toRaces(r);
                 Classes cClass = toClasses(c);
                 
-                Spawn hero{name,race,cClass};
+                Spawn hero{name,race,cClass,lvl};
+                // Map map{};
+                
+                unsigned long long exp{},battleCount{1};
+                
+                do{
+                
+                    hero.printSpawn();
+                    
+                    cout<<"\nHow much experience does your character gained from the "<<battleCount++<<" battle? "<<endl;
+                    cin>>exp;
+                    
+                    hero.expGain(exp);
+                    
+                }while(true);
                 
                 //  YOU ARE READY TO PLAY THE GAME!
                 
@@ -573,6 +615,9 @@ void goodbyeMessage(){
 
 
 int main(){
+    
+    //Spawn spawn{ "Lee", toRaces("Night_Elf"), Classes::Druid, 28, 500};
+    //spawn.printSpawn();
     
     mainMenu();
     return 0;

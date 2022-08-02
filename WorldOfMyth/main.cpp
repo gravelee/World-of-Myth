@@ -199,6 +199,7 @@
 #include <algorithm>
 
 #include "Spawn.h"
+#include "Item.h"
 //#include "Map.h"
 
 using namespace std;
@@ -619,6 +620,42 @@ int main(){
     //Spawn spawn{ "Lee", toRaces("Night_Elf"), Classes::Druid, 28, 500};
     //spawn.printSpawn();
     
-    mainMenu();
+    //*
+    
+    vector<Item> inventory{};
+    
+    Item it1{"Sandworm Relic",60,false,true,0,0,false,false,"None",60,"None",0,"None",0,"None",
+        "A relic, thought lost to time. Acquired from certain enemies and chests in the Endless Sands. Trade these to Elder Rafiq in Pilgrim's Grace in exchange for powerful equipment."
+        ,1,250,0};
+    
+    Item it2{"Unalloyed Bronze Ingot",1,false,true,2,0,false,false,"None",1,"None",0,"None",0,"None",
+        "If mixed into the storehouses of any mortal world, you could not tell the difference between this and bronze made of copper and tin."
+        ,1,20,10};
+    
+    Item it3{"Attendant's Token of Merit",60,false,true,12,0,false,false,"None",60,"None",0,"None",0,"None",
+        "Can be exchanged for valuables offered by Ko'tul in Oribos."
+        ,1,12,0};
+    
+    Item it4{"Vessel of Profound Possibilities",60,false,true,1,0,false,false,"None",60,"None",0,"None",0,
+        "Use: Increase your attunement to the Shadowlands, learning all Conduits and raising them to item level 278."
+        ,"None",1,1,0};
+    
+    Item it5{"Reins of the Grand Expedition Yak",10,false,true,0,0,false,false,"Mount",60,"None",0,"None",0,
+        "Use: Teaches you how to summon this three-person mount with vendors. Excellent for those long journies up the summit of Mount Neverest. Be the envy of your friends. Calls forth the Grand Expedition Yak, complete with helpful grummles for all your vendor needs.",
+        "These beasts of burden are known to carry over five times their own weight and to be capable of lasting several days without food or water."
+        ,1,1,120000};
+    
+    inventory.push_back(it1);
+    inventory.push_back(it2);
+    inventory.push_back(it3);
+    inventory.push_back(it4);
+    inventory.push_back(it5);
+    
+    for( Item item: inventory)
+        item.printItem();
+    
+    //*/
+    
+    //mainMenu();
     return 0;
 }

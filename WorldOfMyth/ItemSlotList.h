@@ -3,6 +3,8 @@
 
 class ItemSlotList
 {
+    
+    
 public:
     ItemSlotList();
     ~ItemSlotList();

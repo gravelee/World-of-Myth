@@ -3,6 +3,11 @@
 
 class Inventory
 {
+    
+private:
+    
+    //vector<Backpack> backpacks;
+    
 public:
     Inventory();
     ~Inventory();

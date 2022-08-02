@@ -2,7 +2,8 @@
 #include <iostream>
 #include <sstream>
 
-Spawn::Spawn( string name, Races race, Classes cClass, unsigned short lvl, unsigned long long exp): name{name}, race{race}, cClass{cClass}, lvl{lvl}, exp{exp}{
+Spawn::Spawn( string name, Races race, Classes cClass, unsigned short lvl, unsigned long long exp): 
+    name{name}, race{race}, cClass{cClass}, lvl{lvl}, exp{exp}{
     
     std::cout<<"Hero " + name +" has been loaded!!! Get ready! The game is ready to begin!"<<std::endl;
 }

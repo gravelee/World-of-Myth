@@ -6,5 +6,6 @@ Inventory::Inventory()
 
 Inventory::~Inventory()
 {
+    //delete backpacks;
 }
 

@@ -54,7 +54,11 @@ public:
         unsigned short cDurability=0, unsigned short iDurability=0, string iClass="None",
         vector<string>&& equips={}, vector<string>&& chances={}, string setInfo="None");
     
-    virtual void printItem() override;  // virtual here is not needed but is used as good prgramming technique
+    virtual void printItem() const override;  // virtual here is not needed but is used as good prgramming technique
+    
+    void printPart1_5() const;
+    void printPart2_5() const;
+    void printPart3_5() const;
     
     ~Equipment();
 

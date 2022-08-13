@@ -1,10 +1,7 @@
 #ifndef _SPAWN_H_
 #define _SPAWN_H_
 
-#include <stdint.h>
 #include <string>
-#include "Inventory.h"
-#include "ItemSlotList.h"
 
 using std::string;
 
@@ -211,8 +208,7 @@ inline Races toRaces( string race){
 enum class Classes{ None,Warrior,Mage,Priest,Rogue,Hunter,Warlock,Shaman,
                 Death_Knight,Demon_Hunter,Paladin,Monk,Druid};
 
-inline const char* toString( Classes cClass)
-{
+inline const char* toString( Classes cClass){
     switch ( cClass)
     {
         case Classes::None:   return "None";
@@ -264,10 +260,7 @@ inline Classes toClasses( string cClass){
         return Classes::None;
 }
 
-class Spawn
-{
-   
-    //friend void complexMenu( string, Spawn);
+class Spawn{
      
 private:
               
@@ -278,20 +271,10 @@ private:
     unsigned short lvl;
     unsigned long long exp;
     
-    /*
+    //vector<Backpack> invetory;
     
-    vector<Backpack> invetory;
+    //Backpack bk1{item1,item2};
     
-    Item item1{"Orb of tarask"},item2{},item5{},item7{};
-    
-    
-    Backpack bk1{item1,item2};
-    Backpack bk2{item5,item7};
-    
-    inventor.push_back(bk1);
-    inventor.push_back(bk2);
-    
-    */
     
     /*
     
@@ -323,6 +306,7 @@ public:
     unsigned long long exp=0);
     
     void expGain( unsigned long long exp);
+    
     void printSpawn() const;
     unsigned short getLevel() const;
     ~Spawn();

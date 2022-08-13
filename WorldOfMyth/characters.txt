@@ -1,5 +1,4 @@
-Gravehunter Tauren Warrior 60      
+Gravehunt Tauren Warrior 60      
 Bladaholick Troll Shaman 60      
 Trubadur Human Mage 32     
 Arthas Undead Death_Knight 16 
-Artorias Undead Warrior 1

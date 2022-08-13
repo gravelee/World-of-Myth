@@ -200,10 +200,19 @@
 
 #include "Spawn.h"
 #include "Item.h"
+#include "Equipment.h"
 //#include "Map.h"
 
-using namespace std;
-
+using std::cin;
+using std::cout;
+using std::endl;
+using std::cerr;
+using std::vector;
+using std::ifstream;
+using std::ofstream;
+using std::exception;
+using std::to_string;
+using std::istringstream;
 
 void goodbyeMessage();
 
@@ -212,8 +221,6 @@ void welcomeMessage(){
     cout<<"Welcome to the \"World of Myth\" v.0.0."<<endl;
     cout<<"This is the best text, fantasy MMORPG."<<endl<<endl;
 }
-
-
 
 void loadCharacterFile( vector<string> &characters){
     
@@ -232,8 +239,6 @@ void loadCharacterFile( vector<string> &characters){
 
     charFile.close();
 }
-
-
 
 void updateCharacterFile( const vector<string> &characters){
     
@@ -260,8 +265,6 @@ void updateCharacterFile( const vector<string> &characters){
     charFile.close();
 }
 
-
-
 uint8_t simpleMenu( string menu, uint8_t numberOfChoices){
     
     uint8_t choice{};
@@ -286,8 +289,6 @@ uint8_t simpleMenu( string menu, uint8_t numberOfChoices){
     
     return choice;
 }
-
-
 
 string chooseName( const vector<string> &characters){
     
@@ -337,8 +338,6 @@ string chooseName( const vector<string> &characters){
     return name;
 }
 
-
-
 Races chooseRace(){
     
     string s{"\n"};
@@ -360,8 +359,6 @@ Races chooseRace(){
     return static_cast<Races>(simpleMenu(menu,13));
 }
 
-
-
 Classes chooseClass(){
     
     string s{"\n"};
@@ -382,15 +379,11 @@ Classes chooseClass(){
     return static_cast<Classes>( simpleMenu( menu,12));
 }
 
-
-
 bool chooseDone( string name, Races race, Classes cClass){
     
     return ( name!="None" && race!=Races::None 
         && cClass!=Classes::None)?true:false;
 }
-
-
 
 bool areYouSure(){
     
@@ -400,8 +393,6 @@ bool areYouSure(){
     
     return ( simpleMenu(menu,2)-1==0)?true:false;
 }
-
-
 
 void createNewCharacter(
     
@@ -439,31 +430,17 @@ void createNewCharacter(
                 cClass = chooseClass();
                 break;
             case 4:
-                done = chooseDone( name,race,cClass);
+                done = chooseDone( name, race, cClass);
                 break;
             default:
                 back = areYouSure();
         }
         
-        /*
-        if( choice == 1)
-            name = chooseName( characters);
-        else if( choice == 2)
-            race = chooseRace();
-        else if( choice == 3)
-            cClass = chooseClass();
-        else if( choice == 4)
-            done = chooseDone( name,race,cClass);
-        else
-            back = areYouSure();
-          */  
-        
-        
-    
     }while( !(done || back));
     
     if( back)
         return;
+        
     //  *** create specific character file ***
     
     cout<<"Congratulations, you have created the \""
@@ -474,8 +451,6 @@ void createNewCharacter(
                                 + " " + toString(cClass) + " 1");
     updateCharacterFile(characters);
 }
-
-
 
 void mainMenu(){
     
@@ -537,22 +512,11 @@ void mainMenu(){
                 
                 Races race =  toRaces(r);
                 Classes cClass = toClasses(c);
-                
                 Spawn hero{name,race,cClass,lvl};
+                
+                hero.printSpawn();
+                
                 // Map map{};
-                
-                unsigned long long exp{},battleCount{1};
-                
-                do{
-                
-                    hero.printSpawn();
-                    
-                    cout<<"\nHow much experience does your character gained from the "<<battleCount++<<" battle? "<<endl;
-                    cin>>exp;
-                    
-                    hero.expGain(exp);
-                    
-                }while(true);
                 
                 //  YOU ARE READY TO PLAY THE GAME!
                 
@@ -577,6 +541,7 @@ void mainMenu(){
                     continue;
                 
                 //  *** delete specific character file ***
+                
                 srand(time(nullptr));
                 istringstream iss{characters.at(embededChoice-1)};
                 bool dialog{static_cast<bool>(rand()%2)};
@@ -604,8 +569,6 @@ void mainMenu(){
     
 }
 
-
-
 void goodbyeMessage(){
     
     cout<<"\t\"World of Myth\" v.0.0.\n"<<endl;
@@ -613,16 +576,49 @@ void goodbyeMessage(){
     cout<<"& dont forget to come bk again to the best text, fantasy MMORPG in the universe!\n"<<endl;
 }
 
-
-
 int main(){
     
     //Spawn spawn{ "Lee", toRaces("Night_Elf"), Classes::Druid, 28, 500};
     //spawn.printSpawn();
     
-    //*
+    /*
     
-    vector<Item> inventory{};
+    vector<Equipment> equipments{};
+    
+    Equipment eq1{"Wolfshead Helm",45,false,true,0,0,false,false,"Head",40,"None",0,"None",0,"None",
+        "None",1,1,74,"Leather",0,0,0.0,0.0,109,0,0,0,0,10,0,0,0,0,0,0,60,60,"Druid",
+        {"Equip: When shapeshifting into Cat form the Druid gains 20 energy, when shapeshifting into Bear form the Druid gains 5 rage."},
+        {},"None"};
+        
+    Equipment eq2{"Devilsaur Leggings",60,false,true,0,0,false,false,"Legs",55,"None",0,"None",0,"None",
+        "None",1,1,2,"Leather",0,0,0.0,0.0,148,0,0,12,0,0,0,0,0,0,0,0,75,75,"None",
+        {"Equip: +46 Attack Power.","Equip: Improves your chance to get a critical strike by 1%."},
+        {},"Devilsaur Armor (0/2)\n\n Devilsaur Leggings\n Devilsaur Gauntlets\n\n(2) Set : Improves your chance to hit by 2%."};
+    
+    Equipment eq3{"Skullflame Shield",59,false,true,0,0,false,false,"Off Hand",54,"None",0,"None",0,"None",
+        "None",1,1,4,"Shield",0,0,0.0,0.0,2256,0,0,0,0,0,0,10,0,0,0,10,120,120,"None",
+        {"Equip: When struck in combat has a 3% chance of stealing 35 life from target enemy. (Proc chance: 3%)"
+        ,"Equip: When struck in combat has a 1% chance of dealing 75 to 125 Fire damage to all targets around you. (Proc chance: 1%)"},
+        {},"None"};
+        
+    Equipment eq4{"Fang of the Crystal Spider",61,false,true,1,0,false,false,"One-Hand",56,"None",0,"None",0,"None",
+        "None",1,1,5,"Dagger",45,84,1.6,40.31,109,0,0,0,0,0,0,0,0,0,0,0,65,65,"None",
+        {},{"Chance on hit: Slows target enemy's casting speed and increases the time between melee and ranged attacks by 10% for 10 sec."},
+        "Spider's Kiss (0/2)\n\n Fang of the Crystal Spider\n Venomspitter\n\n(2) Set : Chance on Hit: Immobilizes the target and lowers their armor by 100 for 10 sec. (Proc chance: 5%)"};
+        
+         
+    equipments.push_back(eq1);
+    equipments.push_back(eq2);
+    equipments.push_back(eq3);
+    equipments.push_back(eq4);
+    
+    for( Equipment equipment: equipments)
+        equipment.printItem();
+    
+    */
+    /*
+    
+    vector<Item> items{};
     
     Item it1{"Sandworm Relic",60,false,true,0,0,false,false,"None",60,"None",0,"None",0,"None",
         "A relic, thought lost to time. Acquired from certain enemies and chests in the Endless Sands. Trade these to Elder Rafiq in Pilgrim's Grace in exchange for powerful equipment."
@@ -645,17 +641,17 @@ int main(){
         "These beasts of burden are known to carry over five times their own weight and to be capable of lasting several days without food or water."
         ,1,1,120000};
     
-    inventory.push_back(it1);
-    inventory.push_back(it2);
-    inventory.push_back(it3);
-    inventory.push_back(it4);
-    inventory.push_back(it5);
+    items.push_back(it1);
+    items.push_back(it2);
+    items.push_back(it3);
+    items.push_back(it4);
+    items.push_back(it5);
     
-    for( Item item: inventory)
+    for( Item item: items)
         item.printItem();
     
     //*/
     
-    //mainMenu();
+    mainMenu();
     return 0;
 }

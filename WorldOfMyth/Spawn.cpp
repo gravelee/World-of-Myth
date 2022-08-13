@@ -1,6 +1,9 @@
-#include "Spawn.h"
 #include <iostream>
 #include <sstream>
+#include "Spawn.h"
+
+using std::cout;
+using std::endl;
 
 Spawn::Spawn( string name, Races race, Classes cClass, unsigned short lvl, unsigned long long exp): 
     name{name}, race{race}, cClass{cClass}, lvl{lvl}, exp{exp}{
@@ -38,10 +41,10 @@ void Spawn::expGain( unsigned long long exp){
 
 void Spawn::printSpawn() const{
     
-    std::cout.flush();
-    std::cout<<"\nCharacter\nName: "<<name<<"\nRace: "<<toString(race)
+    cout.flush();
+    cout<<"\nCharacter\nName: "<<name<<"\nRace: "<<toString(race)
         <<"\nClass: "<<toString(cClass)<<"\nLevel: "<<lvl
-        <<"\nExperience: "<<std::to_string(exp)<<std::endl;
+        <<"\nExperience: "<<std::to_string(exp)<<endl;
 }
 
 unsigned short Spawn::getLevel() const{
@@ -55,5 +58,5 @@ Spawn::~Spawn(){
      *  delete inventory;
      */
     
-    std::cout<<"Destractor for the Spawn Class has been called!\n"<<std::endl;
+    cout<<"Destractor for the Spawn Class has been called!\n"<<endl;
 }

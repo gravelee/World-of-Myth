@@ -1,15 +1,18 @@
-#include<iostream>
-#include<sstream>
-#include<string>
+#include <iostream>
+#include <sstream>
+#include <string>
 #include "Item.h"
 
+using std::stringstream;
+using std::to_string;
 using std::string;
+using std::cout;
 
-string Item::morphString( string str, bool isText){
+string Item::morphString( string str, bool isText) const{
     
     string word{};
     string morphedString{};
-    std::stringstream ss{str};
+    stringstream ss{str};
     uint8_t size{};
     
     if( isText)
@@ -17,7 +20,7 @@ string Item::morphString( string str, bool isText){
     
     while( ss>>word){
         /*
-        std::cout<<"Summary so far:\n"<<morphedString
+        cout<<"Summary so far:\n"<<morphedString
             <<"\nNumber of characters MOD 50 + lines: "<<morphedString.size()%50
             <<"\n\nNew Word to be added: "<<word<<"\nSize: "<<word.size()
             <<"\n\n";
@@ -56,7 +59,31 @@ Item::Item( string name, short int itemLvl, bool questItem, bool bind, unsigned 
     
 }
 
-void Item::printItem(){
+Item::Item( const Item& item){
+    
+    name = item.name;
+    itemLvl = item.itemLvl;
+    questItem = item.questItem;
+    bind = item.bind;
+    unique = item.unique;
+    duration = item.duration;
+    beginsAQuest = item.beginsAQuest;
+    opens = item.opens;
+    gearSlot = item.gearSlot;
+    lvlReq = item.lvlReq;
+    skillTypeReq = item.skillTypeReq;
+    skillPointsReq = item.skillPointsReq;
+    repTypeReq = item.repTypeReq;
+    repPointsReq = item.repPointsReq;
+    use = item.use;
+    summary = item.summary;
+    cStack = item.cStack;
+    iStack =item.iStack;
+    sellPrice = item.sellPrice;
+    
+}
+
+void Item::printItem() const{
     
     printPart1();
     printPart2();
@@ -64,48 +91,49 @@ void Item::printItem(){
     printPart4();
 }
 
-void printPart1(){
+void Item::printPart1() const{
     
-    std::cout<<"\n"<<name
+    cout<<"\n"<<name
         <<"\nItem Level "<<itemLvl
         <<((questItem)?"\nQuest Item":"")
         <<((bind)?"\nBinds when picked up":"")
         <<((unique!=0)?"\nUnique" 
-            + ((unique!=1)?" (" + std::to_string(unique) + ")":"")   :"")   // it is updated further from vanilla
-        <<((duration)?"\nDuration: " + std::to_string(duration):"")   // What duration?
+            + ((unique!=1)?" (" + to_string(unique) + ")":"")   :"")   // it is updated further from vanilla
+        <<((duration)?"\nDuration: " + to_string(duration):"")   // What duration?
         <<((beginsAQuest)?"\nThis item begins a quest":"")
         <<((opens)?"\n<Right click to open>":"")
         <<((gearSlot!="None")?"\n" + gearSlot:"");
 
 }
 
-void printPart2(){
+void Item::printPart2() const{
     
-    std::cout<<((lvlReq!=1)?"\nRequires Level " + std::to_string(lvlReq):"")
+    cout<<((lvlReq!=1)?"\nRequires Level " + to_string(lvlReq):"")
         <<((skillTypeReq!="None")?"\nRequires " 
-            + skillTypeReq + "(" + std::to_string(skillPointsReq) + ")":"")
+            + skillTypeReq + "(" + to_string(skillPointsReq) + ")":"")
         <<((repTypeReq!="None")?"\nRequires " 
-            + repTypeReq + "(" + std::to_string(repPointsReq) + ")":"")
+            + repTypeReq + "(" + to_string(repPointsReq) + ")":"")
         <<((use!="None")?"\n" + morphString(use,false) + "\n":"");
         
 }
 
-void printPart3(){
+void Item::printPart3() const{
     
-    std::cout<<((summary!="None")?"\n" + morphString(summary,true):"")
-        <<((cStack>1)?"\nMax Stack: " + std::to_string(cStack):"")
-        <<((iStack>1)?"\nMax Stack: " + std::to_string(iStack):"");
+    cout<<((summary!="None")?"\n" + morphString(summary,true):"")
+        <<((cStack>1)?"\nMax Stack: " + to_string(cStack):"")
+        <<((iStack>1)?"\nMax Stack: " + to_string(iStack):"");
         
 }
 
-void printPart4(){
+void Item::printPart4() const{
     
-    std::cout<<((sellPrice!=0)?"\nSell Price: " + std::to_string(sellPrice):"")
+    cout<<((sellPrice!=0)?"\nSell Price: " + to_string(sellPrice):"")
         <<"\n\n";
+        
+    //  Change the price from a number to a struct with 3 numbers
 }
 
 Item::~Item(){
     
     
 }
-

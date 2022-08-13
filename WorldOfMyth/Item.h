@@ -2,15 +2,12 @@
 #define ITEM_H_
 
 #include <string>
-#include <vector>
 
 using std::string;
 
-class Equipment;
+//class Equipment;
 
 class Item{
-
-    friend class Equipment;
     
 protected:
     
@@ -65,7 +62,7 @@ protected:
     
     unsigned int sellPrice;
     
-    string morphString( string str, bool isText);
+    string morphString( string str, bool isText) const;
 
 public:
 
@@ -76,11 +73,13 @@ public:
         string use="None", string summary="None", unsigned short cStack=1, 
         unsigned short iStack=1, unsigned int sellPrice=0);
     
-    virtual void printItem();
-    void printPart1();
-    void printPart2();
-    void printPart3();
-    void printPart4();
+    Item( const Item& item);
+    
+    virtual void printItem() const;
+    void printPart1() const;
+    void printPart2() const;
+    void printPart3() const;
+    void printPart4() const;
     ~Item();
 
 };

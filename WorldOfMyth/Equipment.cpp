@@ -5,6 +5,7 @@
 #include "Item.h"
 
 using std::to_string;
+using std::for_each;
 using std::vector;
 using std::string;
 using std::cout;
@@ -16,7 +17,7 @@ Equipment::Equipment(
     unsigned int duration, bool beginsAQuest, bool opens, string gearSlot, 
     unsigned short lvlReq, string skillTypeReq, unsigned short skillPointsReq, 
     string repTypeReq, unsigned short repPointsReq, string use, string summary, 
-    unsigned short cStack, unsigned short iStack, unsigned int sellPrice,
+    unsigned short cStack, unsigned short iStack, Cost sellPrice,
     
     string gearType, unsigned short minDmg, unsigned short maxDmg,
     float speed, float dps, unsigned short armor, unsigned short str,
@@ -24,7 +25,7 @@ Equipment::Equipment(
     unsigned short arcRes, unsigned short fireRes, unsigned short frostRes,
     unsigned short holyRes, unsigned short natuRes, unsigned short shadoRes,
     unsigned short cDurability, unsigned short iDurability, string iClass,
-    vector<string>&& equips, vector<string>&& chances, string setInfo): 
+    vector<string>&& equips, vector<string>&& chances, SetInfo setInfo): 
     
         Item(name,itemLvl,questItem,bind,unique,duration,beginsAQuest,opens,gearSlot,
             lvlReq,skillTypeReq,skillPointsReq,repTypeReq,repPointsReq,use,summary,
@@ -91,7 +92,7 @@ void Equipment::printItem() const{
     
     /*  Prints
     
-    string setInfo, 
+    SetInfo setInfo, 
     
     */
     printPart3_5();
@@ -99,7 +100,7 @@ void Equipment::printItem() const{
     
     /*  Prints
     
-    unsigned int sellPrice.
+    Cost sellPrice.
     
     */
     printPart4();
@@ -161,7 +162,15 @@ void Equipment::printPart2_5() const{
 
 void Equipment::printPart3_5() const{
     
-    cout<<((setInfo!="None")?"\n\n" + setInfo:"");
+    if(setInfo.tittle!="None"){
+        
+        cout<<"\n\n" + setInfo.tittle + "\n";
+        
+        for_each(setInfo.setItems.begin(),setInfo.setItems.end(),
+            [](string str){cout<<" " + str + "\n";});
+        
+        cout<<"\n"<<morphString(setInfo.setSummary,false);
+    }
 }
 
 Equipment::~Equipment(){

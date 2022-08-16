@@ -8,6 +8,13 @@
 using std::string;
 using std::vector;
 
+struct SetInfo{
+    
+    string tittle;
+    vector<string> setItems;
+    string setSummary;
+};
+
 class Equipment : public Item{
     
 protected:
@@ -36,7 +43,7 @@ protected:
     vector<string> equips;
     vector<string> chances;
     
-    string setInfo;
+    SetInfo setInfo;
     
 public:
 
@@ -44,7 +51,7 @@ public:
         unsigned int duration, bool beginsAQuest, bool opens, string gearSlot, 
         unsigned short lvlReq, string skillTypeReq, unsigned short skillPointsReq, 
         string repTypeReq, unsigned short repPointsReq, string use, string summary, 
-        unsigned short cStack, unsigned short iStack, unsigned int sellPrice,
+        unsigned short cStack, unsigned short iStack, Cost sellPrice,
         
         string gearType="None", unsigned short minDmg=0, unsigned short maxDmg=0,
         float speed=0.0, float dps=0.0, unsigned short armor=0, unsigned short str=0,
@@ -52,7 +59,7 @@ public:
         unsigned short arcRes=0, unsigned short fireRes=0, unsigned short frostRes=0,
         unsigned short holyRes=0, unsigned short natuRes=0, unsigned short shadoRes=0,
         unsigned short cDurability=0, unsigned short iDurability=0, string iClass="None",
-        vector<string>&& equips={}, vector<string>&& chances={}, string setInfo="None");
+        vector<string>&& equips={}, vector<string>&& chances={}, SetInfo setInfo={"None",{},"None"});
     
     virtual void printItem() const override;  // virtual here is not needed but is used as good prgramming technique
     

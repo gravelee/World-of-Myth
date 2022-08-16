@@ -49,7 +49,7 @@ string Item::morphString( string str, bool isText) const{
 Item::Item( string name, short int itemLvl, bool questItem, bool bind, unsigned short unique, 
     unsigned int duration, bool beginsAQuest, bool opens, string gearSlot, unsigned short lvlReq, 
     string skillTypeReq, unsigned short skillPointsReq, string repTypeReq, unsigned short repPointsReq,
-    string use, string summary, unsigned short cStack, unsigned short iStack, unsigned int sellPrice):
+    string use, string summary, unsigned short cStack, unsigned short iStack, Cost sellPrice):
     
     name{name}, itemLvl{itemLvl}, questItem{questItem}, bind{bind}, unique{unique}, 
     duration{duration}, beginsAQuest{beginsAQuest}, opens{opens}, gearSlot{gearSlot},
@@ -127,10 +127,12 @@ void Item::printPart3() const{
 
 void Item::printPart4() const{
     
-    cout<<((sellPrice!=0)?"\nSell Price: " + to_string(sellPrice):"")
+    cout<<((sellPrice.gold!=0 || sellPrice.silver!=0 || sellPrice.copper!=0)?"\nSell Price: ":"")
+        <<((sellPrice.gold!=0)?" " + to_string(sellPrice.gold) + " Gold":"")
+        <<((sellPrice.silver!=0)?" " + to_string(sellPrice.silver) + " Silver":"")
+        <<((sellPrice.copper!=0)?" " + to_string(sellPrice.copper) + " Copper":"")
         <<"\n\n";
         
-    //  Change the price from a number to a struct with 3 numbers
 }
 
 Item::~Item(){

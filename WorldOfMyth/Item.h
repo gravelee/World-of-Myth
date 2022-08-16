@@ -5,7 +5,12 @@
 
 using std::string;
 
-//class Equipment;
+struct Cost{
+    
+    unsigned int gold;
+    unsigned int silver;
+    unsigned int copper;
+};
 
 class Item{
     
@@ -28,6 +33,7 @@ protected:
     //unsigned short maxDmg;
     //unsigned float speed;
     //unsigned float dps;
+    //unsigned short block;
     //unsigned short armor;
     //unsigned short str;
     //unsigned short agi;
@@ -42,7 +48,7 @@ protected:
     //unsigned short shadoRes;
     //unsigned short cDurability;
     //unsigned short iDurability;
-    //string iClass;
+    //vector<string> iClass;
     
     unsigned short lvlReq;
     string skillTypeReq;
@@ -58,9 +64,9 @@ protected:
     unsigned short cStack;
     unsigned short iStack;
     
-    //string setInfo;
+    //SetInfo setInfo;
     
-    unsigned int sellPrice;
+    Cost sellPrice;
     
     string morphString( string str, bool isText) const;
 
@@ -71,7 +77,7 @@ public:
         string gearSlot="None", unsigned short lvlReq=1, string skillTypeReq="None", 
         unsigned short skillPointsReq=0, string repTypeReq="None", unsigned short repPointsReq=0,
         string use="None", string summary="None", unsigned short cStack=1, 
-        unsigned short iStack=1, unsigned int sellPrice=0);
+        unsigned short iStack=1, Cost sellPrice={0,0,0});
     
     Item( const Item& item);
     

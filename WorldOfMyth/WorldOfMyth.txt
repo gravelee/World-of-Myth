@@ -1,0 +1,1 @@
+Debug/main.cpp.o Debug/Spawn.cpp.o Debug/Item.cpp.o Debug/Equipment.cpp.o

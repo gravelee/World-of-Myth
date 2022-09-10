@@ -583,32 +583,38 @@ int main(){
     
     vector<Equipment> equipments{};
     
-    Equipment eq1{"Wolfshead Helm",45,false,true,0,0,false,false,"Head",40,"None",0,"None",0,"None",
-        "None",1,1,{0,74,21},"Leather",0,0,0.0,0.0,109,0,0,0,0,10,0,0,0,0,0,0,60,60,"Druid",
+    Equipment eq1{"Wolfshead Helm",45,false,1,0,0,false,false,"Head",40,"None",0,"None",0,"None",
+        "None",1,1,{0,74,21},"Leather",0,0,0.0,0.0,109,0,0,0,0,0,10,0,0,0,0,0,0,60,60,{"Druid"},
         {"Equip: When shapeshifting into Cat form the Druid gains 20 energy, when shapeshifting into Bear form the Druid gains 5 rage."},
         {},{"None",{},"None"}};
         
-    Equipment eq2{"Devilsaur Leggings",60,false,true,0,0,false,false,"Legs",55,"None",0,"None",0,"None",
-        "None",1,1,{2,57,9},"Leather",0,0,0.0,0.0,148,0,0,12,0,0,0,0,0,0,0,0,75,75,"None",
+    //Equipment eq99(eq1);
+        
+    Equipment eq2{"Devilsaur Leggings",60,false,1,0,0,false,false,"Legs",55,"None",0,"None",0,"None",
+        "None",1,1,{2,57,9},"Leather",0,0,0.0,0.0,148,0,0,0,12,0,0,0,0,0,0,0,0,75,75,{},
         {"Equip: +46 Attack Power.","Equip: Improves your chance to get a critical strike by 1%."},
         {},{"Devilsaur Armor (0/2)",{"Devilsaur Leggings","Devilsaur Gauntlets"},"(2) Set : Improves your chance to hit by 2%."}};
     
-    Equipment eq3{"Skullflame Shield",59,false,true,0,0,false,false,"Off Hand",54,"None",0,"None",0,"None",
-        "None",1,1,{4,22,96},"Shield",0,0,0.0,0.0,2256,0,0,0,0,0,0,10,0,0,0,10,120,120,"None",
+    Equipment eq3{"Skullflame Shield",59,false,1,0,0,false,false,"Off Hand",54,"None",0,"None",0,"None",
+        "None",1,1,{4,22,96},"Shield",0,0,0.0,0.0,2256,40,0,0,0,0,0,0,10,0,0,0,10,120,120,{},
         {"Equip: When struck in combat has a 3% chance of stealing 35 life from target enemy. (Proc chance: 3%)"
         ,"Equip: When struck in combat has a 1% chance of dealing 75 to 125 Fire damage to all targets around you. (Proc chance: 1%)"},
         {},{"None",{},"None"}};
         
-    Equipment eq4{"Fang of the Crystal Spider",61,false,true,1,0,false,false,"One-Hand",56,"None",0,"None",0,"None",
-        "None",1,1,{5,33,88},"Dagger",45,84,1.6,40.31,0,0,0,0,0,0,0,0,0,0,0,0,65,65,"None",
+    Equipment eq4{"Fang of the Crystal Spider",61,false,1,1,0,false,false,"One-Hand",56,"None",0,"None",0,"None",
+        "None",1,1,{5,33,88},"Dagger",45,84,1.6,40.31,0,0,0,0,0,0,0,0,0,0,0,0,0,65,65,{},
         {},{"Chance on hit: Slows target enemy's casting speed and increases the time between melee and ranged attacks by 10% for 10 sec."},
         {"Spider's Kiss (0/2)",{"Fang of the Crystal Spider","Venomspitter"},"(2) Set : Chance on Hit: Immobilizes the target and lowers their armor by 100 for 10 sec. (Proc chance: 5%)"}};
          
+    Equipment eq5{"Creeperclaw Greatsword",57,false,2,0,0,false,false,"Two-Hand",37,"None",0,"None",0,"None",
+    "None",1,1,{23,60,48},"Sword",32,55,3.6,12.1,0,0,16,0,24,0,0,0,0,0,0,0,0,85,85,{},{},{},{"None",{},"None"}};
+    
     equipments.push_back(eq1);
     equipments.push_back(eq2);
     equipments.push_back(eq3);
     equipments.push_back(eq4);
-      
+    equipments.push_back(eq5);
+    
     for( Equipment equipment: equipments)
         equipment.printItem();
     
@@ -617,23 +623,25 @@ int main(){
     
     vector<Item> items{};
     
-    Item it1{"Sandworm Relic",60,false,true,0,0,false,false,"None",60,"None",0,"None",0,"None",
+    Item it1{"Sandworm Relic",60,false,1,0,0,false,false,"None",60,"None",0,"None",0,"None",
         "A relic, thought lost to time. Acquired from certain enemies and chests in the Endless Sands. Trade these to Elder Rafiq in Pilgrim's Grace in exchange for powerful equipment."
         ,1,250,{0,0,0}};
+        
+    //Item it99(it1);
     
-    Item it2{"Unalloyed Bronze Ingot",1,false,true,2,0,false,false,"None",1,"None",0,"None",0,"None",
+    Item it2{"Unalloyed Bronze Ingot",1,false,1,2,0,false,false,"None",1,"None",0,"None",0,"None",
         "If mixed into the storehouses of any mortal world, you could not tell the difference between this and bronze made of copper and tin."
         ,1,20,{10,0,0}};
     
-    Item it3{"Attendant's Token of Merit",60,false,true,12,0,false,false,"None",60,"None",0,"None",0,"None",
+    Item it3{"Attendant's Token of Merit",60,false,1,12,0,false,false,"None",60,"None",0,"None",0,"None",
         "Can be exchanged for valuables offered by Ko'tul in Oribos."
-        ,1,12,{0,0,0}};
+        ,1,12,{1000,0,0}};
     
-    Item it4{"Vessel of Profound Possibilities",60,false,true,1,0,false,false,"None",60,"None",0,"None",0,
+    Item it4{"Vessel of Profound Possibilities",60,false,1,1,0,false,false,"None",60,"None",0,"None",0,
         "Use: Increase your attunement to the Shadowlands, learning all Conduits and raising them to item level 278."
         ,"None",1,1,{0,0,0}};
     
-    Item it5{"Reins of the Grand Expedition Yak",10,false,true,0,0,false,false,"Mount",60,"None",0,"None",0,
+    Item it5{"Reins of the Grand Expedition Yak",10,false,1,0,0,false,false,"Mount",60,"None",0,"None",0,
         "Use: Teaches you how to summon this three-person mount with vendors. Excellent for those long journies up the summit of Mount Neverest. Be the envy of your friends. Calls forth the Grand Expedition Yak, complete with helpful grummles for all your vendor needs.",
         "These beasts of burden are known to carry over five times their own weight and to be capable of lasting several days without food or water."
         ,1,1,{30000,0,0}};
@@ -649,6 +657,6 @@ int main(){
     
     //*/
     
-    mainMenu();
+    //mainMenu();
     return 0;
 }

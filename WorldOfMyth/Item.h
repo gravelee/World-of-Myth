@@ -14,12 +14,13 @@ struct Cost{
 
 class Item{
     
+    string str;
 protected:
     
     string name;
     short int itemLvl;
     bool questItem;
-    bool bind;
+    unsigned short bind;
     unsigned short unique;
     unsigned int duration;
     bool beginsAQuest;
@@ -33,8 +34,8 @@ protected:
     //unsigned short maxDmg;
     //unsigned float speed;
     //unsigned float dps;
-    //unsigned short block;
     //unsigned short armor;
+    //unsigned short block;
     //unsigned short str;
     //unsigned short agi;
     //unsigned short sta;
@@ -69,10 +70,15 @@ protected:
     Cost sellPrice;
     
     string morphString( string str, bool isText) const;
+    
+    void printPart1() const;
+    void printPart2() const;
+    void printPart3() const;
+    void printPart4() const;
 
 public:
 
-    Item( string name="None", short int itemLvl=1, bool questItem=false, bool bind=false, 
+    Item( string name="None", short int itemLvl=1, bool questItem=false, unsigned short bind=0, 
         unsigned short unique=0, unsigned int duration=0, bool beginsAQuest=false, bool opens=false, 
         string gearSlot="None", unsigned short lvlReq=1, string skillTypeReq="None", 
         unsigned short skillPointsReq=0, string repTypeReq="None", unsigned short repPointsReq=0,
@@ -82,10 +88,7 @@ public:
     Item( const Item& item);
     
     virtual void printItem() const;
-    void printPart1() const;
-    void printPart2() const;
-    void printPart3() const;
-    void printPart4() const;
+    
     ~Item();
 
 };

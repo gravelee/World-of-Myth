@@ -46,7 +46,7 @@ string Item::morphString( string str, bool isText) const{
     return morphedString;
 }
 
-Item::Item( string name, short int itemLvl, bool questItem, bool bind, unsigned short unique, 
+Item::Item( string name, short int itemLvl, bool questItem, unsigned short bind, unsigned short unique, 
     unsigned int duration, bool beginsAQuest, bool opens, string gearSlot, unsigned short lvlReq, 
     string skillTypeReq, unsigned short skillPointsReq, string repTypeReq, unsigned short repPointsReq,
     string use, string summary, unsigned short cStack, unsigned short iStack, Cost sellPrice):
@@ -96,7 +96,7 @@ void Item::printPart1() const{
     cout<<"\n"<<name
         <<"\nItem Level "<<itemLvl
         <<((questItem)?"\nQuest Item":"")
-        <<((bind)?"\nBinds when picked up":"")
+        <<((bind!=0)?(bind!=1?"\nBinds when equipped":"\nBinds when picked up"):"")
         <<((unique!=0)?"\nUnique" 
             + ((unique!=1)?" (" + to_string(unique) + ")":"")   :"")   // it is updated further from vanilla
         <<((duration)?"\nDuration: " + to_string(duration):"")   // What duration?
